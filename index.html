@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billiard Scoreboard BY DEEVINE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <div class="container">
+        <h1 class="text-lg font-bold text-center mb-2">Pool Scoreboard BY DEEVINE</h1>
+        
+        <!-- Game Controls -->
+        <div class="game-controls">
+            <button id="nextPlayer" class="action-btn bg-blue-600 hover:bg-blue-700 rounded">Next</button>
+            <button id="newGame" class="action-btn bg-gray-600 hover:bg-gray-700 rounded">New</button>
+            <button id="undoBtn" class="action-btn bg-red-600 hover:bg-yellow-700 rounded">Undo</button>
+            <button id="redoBtn" class="action-btn bg-red-600 hover:bg-yellow-700 rounded">Redo</button>
+            <button id="toggleDataPageBtn" class="action-btn bg-purple-600 hover:bg-purple-700 rounded">Stat</button>
+        </div>
+        
+        <!-- Game Interface -->
+        <div id="gameInterface" class="hidden">
+            <!-- Players Scoreboard -->
+            <div id="playersScoreboard" class="player-grid mb-2"></div>
+            
+            <!-- Ball Number Pad -->
+            <div class="ball-section bg-gray-800 rounded-lg">
+                <h2 class="font-semibold">Remaining: <span id="remainingBallsSum">120</span></h2>
+                <div class="compact-balls">
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-red-600 hover:bg-red-700" value="3">3</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(3, 'pocket')">+6</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(3, 'foul')">-4</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-yellow-600 hover:bg-yellow-700" value="4">4</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(4, 'pocket')">+4</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(4, 'foul')">-4</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-blue-600 hover:bg-blue-700" value="5">5</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(5, 'pocket')">+5</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(5, 'foul')">-5</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-purple-600 hover:bg-purple-700" value="6">6</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(6, 'pocket')">+6</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(6, 'foul')">-6</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-orange-600 hover:bg-orange-700" value="7">7</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(7, 'pocket')">+7</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(7, 'foul')">-7</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-black text-white hover:bg-gray-800" value="8">8</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(8, 'pocket')">+8</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(8, 'foul')">-8</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-yellow-400 hover:bg-yellow-500 text-black" value="9">9</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(9, 'pocket')">+9</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(9, 'foul')">-9</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-blue-400 hover:bg-blue-500" value="10">10</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(10, 'pocket')">+10</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(10, 'foul')">-10</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-red-400 hover:bg-red-500" value="11">11</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(11, 'pocket')">+11</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(11, 'foul')">-11</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-purple-400 hover:bg-purple-500" value="12">12</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(12, 'pocket')">+12</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(12, 'foul')">-12</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-orange-400 hover:bg-orange-500" value="13">13</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(13, 'pocket')">+13</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(13, 'foul')">-13</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-green-500 hover:bg-green-600" value="14">14</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(14, 'pocket')">+14</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(14, 'foul')">-14</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-red-500 hover:bg-red-600" value="15">15</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(15, 'pocket')">+15</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(15, 'foul')">-15</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Player Setup -->
+        <div id="playerSetup" class="player-setup bg-gray-800 rounded-lg">
+            <h2 class="font-semibold">Game Setup</h2>
+            <div class="grid grid-cols-3 gap-1 mb-2">
+                <button id="2players" class="bg-blue-600 hover:bg-blue-700 py-1 rounded text-sm">2 Players</button>
+                <button id="3players" class="bg-blue-600 hover:bg-blue-700 py-1 rounded text-sm">3 Players</button>
+                <button id="4players" class="bg-blue-600 hover:bg-blue-700 py-1 rounded text-sm">4 Players</button>
+            </div>
+            
+            <div id="playerInputs" class="hidden">
+                <div class="grid grid-cols-2 gap-2 mb-2">
+                    <div>
+                        <label class="block text-sm mb-0.5">Player 1</label>
+                        <input type="text" id="player1" class="w-full p-1 rounded bg-gray-700 text-white text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm mb-0.5">Player 2</label>
+                        <input type="text" id="player2" class="w-full p-1 rounded bg-gray-700 text-white text-sm">
+                    </div>
+                    <div id="player3Container" class="hidden">
+                        <label class="block text-sm mb-0.5">Player 3</label>
+                        <input type="text" id="player3" class="w-full p-1 rounded bg-gray-700 text-white text-sm">
+                    </div>
+                    <div id="player4Container" class="hidden">
+                        <label class="block text-sm mb-0.5">Player 4</label>
+                        <input type="text" id="player4" class="w-full p-1 rounded bg-gray-700 text-white text-sm">
+                    </div>
+                </div>
+                <button id="startGame" class="w-full bg-green-600 hover:bg-green-700 py-1 rounded text-sm">Start Game</button>
+            </div>
+        </div>
+
+        <!-- Data Collection Page -->
+        <div id="dataCollectionPage" class="hidden data-collection bg-gray-800 rounded-lg">
+            <h2 class="font-semibold">Game Stats</h2>
+            <table class="w-full bg-gray-700 rounded">
+                <thead>
+                    <tr>
+                        <th class="text-left">Player</th>
+                        <th class="text-left">Wins</th>
+                        <th class="text-left">Losses</th>
+                    </tr>
+                </thead>
+                <tbody id="dataCollectionContent"></tbody>
+            </table>
+            <button id="resetDataBtn" class="w-full bg-red-600 hover:bg-red-700 py-1 rounded mt-2 text-sm">Reset Data</button>
+        </div>
+    </div>
+
+    <!-- Zoom Controls -->
+    <div class="zoom-controls">
+        <button class="zoom-btn" onclick="setZoom(1)">100%</button>
+        <button class="zoom-btn" onclick="setZoom(0.9)">90%</button>
+        <button class="zoom-btn" onclick="setZoom(0.8)">80%</button>
+        <button class="zoom-btn" onclick="setZoom(0.7)">70%</button>
+    </div>
+
+    <script src="src/js/app.js"></script>
+    <script>
+        function setZoom(scale) {
+            const container = document.querySelector('.container');
+            container.style.transform = `scale(${scale})`;
+            container.style.transformOrigin = 'top center';
+        }
+    </script>
+</body>
+</html> 
