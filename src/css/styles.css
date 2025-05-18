@@ -67,6 +67,7 @@
     max-width: 100%;
     padding: 0.5rem;
     transition: transform 0.3s ease;
+    padding-bottom: 60px;
 }
 
 .game-controls {
@@ -194,4 +195,49 @@
         transform: scale(0.7);
         transform-origin: top center;
     }
+}
+
+/* Advertisement Banner */
+.ad-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(17, 24, 39, 0.95);
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    z-index: 1000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ad-banner a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: white;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(59, 130, 246, 0.1);
+    transition: background-color 0.2s;
+}
+
+.ad-banner a:hover {
+    background: rgba(59, 130, 246, 0.2);
+}
+
+.ad-banner .icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #3b82f6;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: bold;
 } 
