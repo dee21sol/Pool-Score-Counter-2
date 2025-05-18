@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billiard Scoreboard BY DEEVINE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <div class="container mx-auto px-4 py-4">
+        <h1 class="text-xl font-bold text-center mb-4">Pool Scoreboard BY DEEVINE</h1>
+        
+        <!-- Game Controls -->
+        <div class="flex justify-between mb-2">
+            <button id="nextPlayer" class="action-btn bg-blue-600 hover:bg-blue-700 rounded">Next Player</button>
+            <button id="newGame" class="action-btn bg-gray-600 hover:bg-gray-700 rounded">New Game</button>
+            <button id="undoBtn" class="action-btn bg-red-600 hover:bg-yellow-700 rounded">Undo</button>
+            <button id="redoBtn" class="action-btn bg-red-600 hover:bg-yellow-700 rounded">Redo</button>
+            <button id="toggleDataPageBtn" class="action-btn bg-purple-600 hover:bg-purple-700 rounded">Stat</button>
+        </div>
+        
+        <!-- Game Interface -->
+        <div id="gameInterface" class="hidden">
+            <!-- Players Scoreboard -->
+            <div id="playersScoreboard" class="player-grid gap-2 mb-4"></div>
+            
+            <!-- Ball Number Pad -->
+            <div class="bg-gray-800 p-2 rounded-lg mb-4">
+                <h2 class="text-lg font-semibold mb-2">Remaining Balls: <span id="remainingBallsSum">120</span></h2>
+                <div class="compact-balls">
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-red-600 hover:bg-red-700" value="3">3</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(3, 'pocket')">+6</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(3, 'foul')">-4</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-yellow-600 hover:bg-yellow-700" value="4">4</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(4, 'pocket')">+4</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(4, 'foul')">-4</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-blue-600 hover:bg-blue-700" value="5">5</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(5, 'pocket')">+5</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(5, 'foul')">-5</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-purple-600 hover:bg-purple-700" value="6">6</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(6, 'pocket')">+6</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(6, 'foul')">-6</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-orange-600 hover:bg-orange-700" value="7">7</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(7, 'pocket')">+7</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(7, 'foul')">-7</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-black text-white hover:bg-gray-800" value="8">8</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(8, 'pocket')">+8</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(8, 'foul')">-8</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-yellow-400 hover:bg-yellow-500 text-black" value="9">9</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(9, 'pocket')">+9</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(9, 'foul')">-9</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-blue-400 hover:bg-blue-500" value="10">10</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(10, 'pocket')">+10</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(10, 'foul')">-10</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-red-400 hover:bg-red-500" value="11">11</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(11, 'pocket')">+11</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(11, 'foul')">-11</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-purple-400 hover:bg-purple-500" value="12">12</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(12, 'pocket')">+12</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(12, 'foul')">-12</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-orange-400 hover:bg-orange-500" value="13">13</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(13, 'pocket')">+13</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(13, 'foul')">-13</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-green-500 hover:bg-green-600" value="14">14</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(14, 'pocket')">+14</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(14, 'foul')">-14</button>
+                        </div>
+                    </div>
+                    <div class="relative ball-container">
+                        <button class="ball-btn bg-red-500 hover:bg-red-600" value="15">15</button>
+                        <div class="ball-actions">
+                            <button class="action-btn bg-green-600 hover:bg-green-700 rounded" onclick="handleBallAction(15, 'pocket')">+15</button>
+                            <button class="action-btn bg-red-600 hover:bg-red-700 rounded" onclick="handleBallAction(15, 'foul')">-15</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Player Setup -->
+        <div id="playerSetup" class="bg-gray-800 p-4 rounded-lg">
+            <h2 class="text-lg font-semibold mb-3">Game Setup</h2>
+            <div class="grid grid-cols-3 gap-2 mb-4">
+                <button id="2players" class="bg-blue-600 hover:bg-blue-700 py-2 rounded">2 Players</button>
+                <button id="3players" class="bg-blue-600 hover:bg-blue-700 py-2 rounded">3 Players</button>
+                <button id="4players" class="bg-blue-600 hover:bg-blue-700 py-2 rounded">4 Players</button>
+            </div>
+            
+            <div id="playerInputs" class="hidden">
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block mb-1">Player 1 Name</label>
+                        <input type="text" id="player1" class="w-full p-2 rounded bg-gray-700 text-white">
+                    </div>
+                    <div>
+                        <label class="block mb-1">Player 2 Name</label>
+                        <input type="text" id="player2" class="w-full p-2 rounded bg-gray-700 text-white">
+                    </div>
+                    <div id="player3Container" class="hidden">
+                        <label class="block mb-1">Player 3 Name</label>
+                        <input type="text" id="player3" class="w-full p-2 rounded bg-gray-700 text-white">
+                    </div>
+                    <div id="player4Container" class="hidden">
+                        <label class="block mb-1">Player 4 Name</label>
+                        <input type="text" id="player4" class="w-full p-2 rounded bg-gray-700 text-white">
+                    </div>
+                </div>
+                <button id="startGame" class="w-full bg-green-600 hover:bg-green-700 py-2 rounded">Start Game</button>
+            </div>
+        </div>
+
+        <!-- Data Collection Page -->
+        <div id="dataCollectionPage" class="hidden bg-gray-800 p-4 rounded-lg">
+            <h2 class="text-lg font-semibold mb-3">Game Data Collection</h2>
+            <table class="w-full bg-gray-700 rounded">
+                <thead>
+                    <tr>
+                        <th class="p-2 text-left">Player Names</th>
+                        <th class="p-2 text-left">Wins</th>
+                        <th class="p-2 text-left">Losses</th>
+                    </tr>
+                </thead>
+                <tbody id="dataCollectionContent"></tbody>
+            </table>
+            <button id="resetDataBtn" class="w-full bg-red-600 hover:bg-red-700 py-2 rounded mt-4">Reset Data</button>
+        </div>
+    </div>
+
+    <script src="src/js/app.js"></script>
+</body>
+</html> 

@@ -1,0 +1,62 @@
+.ball-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin: 1px;
+    font-size: 0.8rem;
+}
+
+.ball-btn:disabled {
+    opacity: 0.3;
+    filter: blur(1px);
+}
+
+.action-btn {
+    padding: 0.25rem;
+    font-size: 0.8rem;
+    width: 60px;
+}
+
+.player-card {
+    min-width: 120px;
+    max-width: 150px;
+    height: 120px;
+    transition: all 0.2s;
+}
+
+.current-player {
+    border: 2px solid #3b82f6;
+}
+
+.eliminated {
+    opacity: 0.5;
+}
+
+.ball-actions {
+    display: none;
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.ball-container:hover .ball-actions {
+    display: flex;
+}
+
+.compact-balls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+}
+
+.player-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 8px;
+} 
